@@ -18,7 +18,7 @@
  * @date <13.06.2021 >
  *
  */
-#ifndef __STATS_H__
+ #ifndef __STATS_H__
 #define __STATS_H__
 
 /* Add Your Declarations and Function Comments here */ 
@@ -122,6 +122,5 @@ ARRAY_TYPE find_minimum(ARRAY_TYPE *data, ARRAY_SIZE_TYPE n);
  * @return <void>
 **/
 void sort_array(ARRAY_TYPE *data, ARRAY_SIZE_TYPE n);
-/**
 
 #endif /* __STATS_H__ */
