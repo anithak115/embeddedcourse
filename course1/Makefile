@@ -27,14 +27,15 @@
 #      HOST - Default platform
 #      MSP342 - Target cross-compiled platform
 #
-# Author: K Anitha
-# Date:   19/6/2021
+# Author: K.Anitha
+# Date:   02/07/2021
 #
 #------------------------------------------------------------------------------
 include sources.mk
 
 # Platform Overrides.
 PLATFORM ?= HOST
+TEST = NO
 
 # General flags for both platforms.
 G_FLAGS = -std=c99 \
@@ -53,7 +54,7 @@ EXTRA = -mthumb \
 	-mfpu=fpv4-sp-d16
 
 
-TARGET = c1m2
+TARGET = course1
 
 
 # Conditional If for select between Platforms (HOST & MSP432).
@@ -90,6 +91,13 @@ $(error Not defined Platform, Please select from Platforms (HOST & MSP432))
 
 endif
 
+# Enable Test Flag
+ifeq ($(TEST), YES)
+	TESTFLAGS = -D COURSE1 -D VERBOSE
+else
+	TESTFLAGS = -D COURSE1
+endif
+
 # Building Object file (file.o)
 # Building Dependency file (file.d)
 # Building Assembly file (file.asm)
@@ -100,19 +108,15 @@ ASMS = $(SOURCES:.c=.asm)
 PREP = $(SOURCES:.c=.i)
 
 %.o : %.c
-	$(CC) -c $< $(CFLAGS) $(CPPFLAGS) -o $@
+	$(CC) -c $< $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TESTFLAGS) -o $@
 
 %.asm: %.c
-	$(CC) -S $< $(CFLAGS) $(CPPFLAGS) -o $@
+	$(CC) -S $< $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TESTFLAGS) -o $@
 
 %.i: %.c
-	$(CC) -E $< $(CPPFLAGS) -o $@
+	$(CC) -E $< $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TESTFLAGS) -o $@
 
-%.d: %.c
-	$(CC) -E -M $< $(CPPFLAGS) -o $@
 
-$(TARGET).asm: $(TARGET).out
-	$(OBJDUMP) -d $(TARGET).out >> $@
 
 
 .PHONY: compile-all
@@ -121,12 +125,19 @@ compile-all: $(OBJS)
 .PHONY: build
 build: $(TARGET).out
 
-
-$(TARGET).out: $(OBJS) $(DEPS)
-	$(CC) $(OBJS) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o $@
+$(TARGET).out: $(SOURCES)
+	$(CC) $(SOURCES) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TESTFLAGS) -o $@
 	$(SIZE) $@
+
+.PHONY: all_files
+
+all_files: $(SOURCES)
+	make $(PREP)
+	make $(ASMS)
+	make compile-all
+	make $(TARGET).out
+	$(OBJDUMP) -t $(TARGET).out > $(TARGET).symbol_table
 
 .PHONY: clean
 clean:
-	rm -f *.o *.i *.asm *.d  *.out $(TARGET).map
-
+	rm -f *.o *.i *.asm  $(TARGET).out*  $(TARGET).map

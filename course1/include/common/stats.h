@@ -9,118 +9,105 @@
  *
  *****************************************************************************/
 /**
- * @file <stats.h> 
- * @brief <holon file for statistics functions >
+ * @file Week1_Programming_Assignment_stats.h
+ * @brief A simple application That Perform statistical analytics on data set
  *
- * <series of basic statistical functions>
+ * Analyzing an array of unsigned char data items and report analytics on the 
+ * Maximum, Minimum, Mean, and median of the data set Rounded down to the 
+ * nearest interger.
+ * After analysis and sorting is doen, data will be printed on the screen in 
+ * nicely formatted presentation.
  *
- * @author <Kategaru Anitha>
- * @date <13.06.2021 >
+ * @author Kategaru Anitha
+ * @date   01-07-2021
  *
  */
- #ifndef __STATS_H__
+#ifndef __STATS_H__
 #define __STATS_H__
 
-/* Add Your Declarations and Function Comments here */ 
-typedef	unsigned char	ARRAY_TYPE;
-typedef	int		ARRAY_SIZE_TYPE;
-
-
+void print_statistics(unsigned char* array, unsigned char length);
 /**
- * @brief <print statistics about the data array>
+ * @brief Print unsigned Char
  *
- * <A function that prints the statistics of an array including
- * minimum, maximum, mean, and median.>
+ * Function to print Median, Mean, Max, Mini
  *
- * @param <ARRAY_TYPE *data> <pointer to an array of data>
- * @param <ARRAY_SIZE_TYPE n> <number of elements in array>
- *
- * @return <void>
-**/
-void print_statistics(ARRAY_TYPE *data, ARRAY_SIZE_TYPE n);
-
-
+ * @param int Value  
+ *  
+ * @return None
+ */
+#ifdef VERBOSE
+void print_array(unsigned char* array, unsigned char length);
+#endif
 /**
- * @brief <print out the elements of the array>
+ * @brief Print array of char
  *
- *  <Given an array of data and a length, prints the array to the screen>
+ * Function to print an array of char
  *
- * @param <ARRAY_TYPE *data> <pointer to an array of data>
- * @param <ARRAY_SIZE_TYPE n> <number of elements in array>
- *
- * @return <void>
-**/
-void print_array(ARRAY_TYPE *data, ARRAY_SIZE_TYPE n);
+ * @param Pointer to an array 
+ * @param int size of array 
+ *  
+ * @return None
+ */
 
+unsigned char find_median(unsigned char* array, unsigned char length);
 /**
- * @brief <find the median of an array>
+ * @brief Find the Median 
  *
- * < Given an array of data and a length, returns the median value>
- * The median is also the number that is halfway into the set.
- * To find the median, the data should be arranged in order from
- * least to greatest. If there is an even number of items in the
- * data set, then the median is found by taking the mean (average)
- * of the two middlemost numbers.
+ * Function to find the Median 
  *
- * @param <ARRAY_TYPE *data> <pointer to an array of data>
- * @param <ARRAY_SIZE_TYPE n> <number of elements in array>
- *
- * @return <Add Return Informaiton here>
-**/
-ARRAY_TYPE find_median(ARRAY_TYPE *data, ARRAY_SIZE_TYPE n);
+ * @param Pointer to an array 
+ * @param int size of array 
+ *  
+ * @return Median value
+ */
 
+unsigned char find_mean(unsigned char* array, unsigned char length);
 /**
- * @brief <Add Brief Description of Function Here>
+ * @brief Find the Mean
  *
- * <Add Extended Description Here>
+ * Function to find the Mean 
  *
- * @param <ARRAY_TYPE *data> <pointer to an array of data>
- * @param <ARRAY_SIZE_TYPE n> <number of elements in array>
- *
- * @return <Add Return Informaiton here>
-**/
-// - Given an array of data and a length, returns the mean
-ARRAY_TYPE find_mean(ARRAY_TYPE *data, ARRAY_SIZE_TYPE n);
+ * @param Pointer to an array 
+ * @param int size of array 
+ *  
+ * @return Mean value
+ */
 
+unsigned char find_maximum(unsigned char* array, unsigned char length);
 /**
- * @brief <Add Brief Description of Function Here>
+ * @brief Find the Maximum
  *
- * <Add Extended Description Here>
+ * Function to find the Maximum 
  *
- * @param <ARRAY_TYPE *data> <pointer to an array of data>
- * @param <ARRAY_SIZE_TYPE n> <number of elements in array>
- *
- * @return <Add Return Informaiton here>
-**/
-// - Given an array of data and a length, returns the maximum
-ARRAY_TYPE find_maximum(ARRAY_TYPE *data, ARRAY_SIZE_TYPE n);
+ * @param Pointer to an array 
+ * @param int size of array 
+ *  
+ * @return Maximum value
+ */
 
+unsigned char find_minimum(unsigned char* array, unsigned char length);
 /**
- * @brief <Add Brief Description of Function Here>
+ * @brief Find the minimum
  *
- * <Add Extended Description Here>
+ * Function to find the minimum 
  *
- * @param <ARRAY_TYPE *data> <pointer to an array of data>
- * @param <ARRAY_SIZE_TYPE n> <number of elements in array>
- *
- * @return <Add Return Informaiton here>
-**/
-// - Given an array of data and a length, returns the minimum
-ARRAY_TYPE find_minimum(ARRAY_TYPE *data, ARRAY_SIZE_TYPE n);
+ * @param Pointer to an array 
+ * @param int size of array 
+ *  
+ * @return minimum value
+ */
 
+void sort_array(unsigned char* array, unsigned char length);
 /**
- * @brief <sort an arraye>
+ * @brief Sort an array descendingly
  *
- * < Given an array of data and a length, sorts the array
- * from largest to smallest. (The zeroth Element should be
- * the largest value, and the last element (n-1) should be
- * the smallest element. >
+ * Given an array of data and length, Sort the array from largest to smalles
  *
- * @param <ARRAY_TYPE *data> <pointer to an array of data>
- * @param <ARRAY_SIZE_TYPE n> <number of elements in array>
- *
- * @return <void>
-**/
-void sort_array(ARRAY_TYPE *data, ARRAY_SIZE_TYPE n);
+ * @param Pionter to an array 
+ * @param int size of array 
+ *  
+ * @return None
+ */
+
 
 #endif /* __STATS_H__ */
